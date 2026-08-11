@@ -1,0 +1,181 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Weather Web</title>
+    <link rel="stylesheet" href="./style.css" />
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/7.3.0/css/all.min.css"
+      integrity="sha512-ApSLB1Pd3/bZN8fWB/RG9YhN/7bd9Hkf3AGaE2mPfebjrxagjuBtx2GcgdqIlJkUzwylBo61r9Xa9NmgBI0swA=="
+      crossorigin="anonymous"
+      referrerpolicy="no-referrer"
+    />
+  </head>
+  <body>
+
+    <div class="heading">
+            <h1>Weather Forcast Web </h1>
+            <p>Design By Yash</p>
+         </div> 
+         
+    <div class="card">
+      <!-- upper  -->
+       
+
+      <div class="search">
+        <input
+          type="text"
+          class="inp"
+          placeholder="Enter City Name"
+          spellcheck="false"
+        />
+        <div class="button">
+          <a href="#"> <i class="fa-solid fa-magnifying-glass"></i></a>
+        </div>
+        
+      </div>
+      <div class="error">
+            <p>Invalid City Name</p>
+        </div>
+
+      <!-- Weather -->
+
+      <div class="weather">
+        <div class="weather_img">
+          <img class="weather-icon" src="./images/clear.png" />
+          <h2 class="temp">7°c</h2>
+          <h2 class="city">Noida</h2>
+        </div>
+      </div>
+
+      <div class="info">
+
+
+<div class="col">
+    <img src="./images/humidity.png" />
+
+  <div class="det">
+    <p class="humidity">48%</p>
+      <p>Humidity</p>
+  </div>
+
+</div>
+
+       <div class="col">
+    <img src="./images/humidity.png" />
+
+  <div class="det">
+  <p class="wind">Wind speed</p>
+
+    <p >Wind Speed</p>
+  </div>
+</div>
+
+
+            
+           
+          </div>
+           
+         
+         
+        </div>
+      </div>
+
+    </div>
+
+
+
+  <!-- JavaScript -->
+
+
+
+
+    <script>
+
+
+        const apiKey = "5c3bd6f02bc15d5f8934a6e25a170e66";
+        const apiurl = "https://api.openweathermap.org/data/2.5/weather?&units=metric&q=";
+
+        const searchbox = document.querySelector(".search input");
+        const searchbtn = document.querySelector(".search .button");
+
+        const weathericon = document.querySelector(".weather-icon");
+
+        async function checkweather(city){
+           const responce = await fetch(apiurl + city + `&appid=${apiKey}`);
+
+           if (responce.status == 404 ) {
+            document.querySelector(".error").style.display = "block"
+            document.querySelector(".weather").style.display = "none"
+            document.querySelector(".info").style.display = "none"
+
+
+           } 
+           else {
+            document.querySelector(".error").style.display = "none"
+
+           }
+           var data = await responce.json();
+         
+
+        document.querySelector(".city") .innerHTML = data.name;
+        document.querySelector(".temp") .innerHTML = Math.round(data.main.temp)  + "°c";
+        document.querySelector(".humidity") .innerHTML = data.main.humidity + "%";
+        document.querySelector(".wind") .innerHTML = data.wind.speed + "Km/h";
+
+        if(data.weather[0].main == "clouds"){
+            weathericon.src = "images/clouds.png";
+
+        }
+        else if (data.weather[0].main == "clear"){
+            weathericon.src = "images/clear.png";
+
+
+        }
+         else if (data.weather[0].main == "Rain"){
+            weathericon.src = "images/rain.png";
+
+
+        }
+         else if (data.weather[0].main == "Drizzle"){
+            weathericon.src = "images/drizzle.png";
+
+
+        }
+         else if (data.weather[0].main == "Mist"){
+            weathericon.src = "images/mist.png";
+
+
+        }
+        document.querySelector(".weather " ).style.display = "block";
+        document.querySelector(".info " ).style.display = "flex"; 
+
+
+        }
+
+            searchbtn.addEventListener("click", () => {
+    checkweather(searchbox.value);
+});
+       
+            searchbox.addEventListener("keydown", ( event) =>{
+                if (event.key == "Enter"){
+        checkweather(searchbox.value);
+
+
+                }
+
+
+            })
+
+
+
+
+
+    </script>
+
+
+
+  </body>
+</html>
