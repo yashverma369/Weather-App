@@ -3,7 +3,7 @@
 A clean, responsive weather application that fetches real-time weather data for any city in the world using the OpenWeatherMap API.
 
 ### 🔗 Live Demo
-**[View Live Site →](https://yash-verma-51.github.io/Weather-App/)**
+**[View Live Site →](https://yashverma369.github.io/Weather-App/)**
 
 ![HTML5](https://img.shields.io/badge/HTML5-E34F26?style=for-the-badge&logo=html5&logoColor=white)
 ![CSS3](https://img.shields.io/badge/CSS3-1572B6?style=for-the-badge&logo=css3&logoColor=white)
